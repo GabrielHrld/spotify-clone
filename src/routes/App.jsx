@@ -1,11 +1,12 @@
 import React from 'react';
+import  MusicPlayer  from "../components/MusicPlayer/index";
 
 import '../styles/app.scss';
 
 const App = () => {
   return (
-    <div>
-      <h1>Hola mundo</h1>
+    <div className="app">
+      <MusicPlayer />
     </div>
   );
 };

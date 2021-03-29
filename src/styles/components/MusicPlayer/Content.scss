@@ -1,0 +1,7 @@
+@import '../../vars';
+
+.content {
+  width: calc(100% - 200px);
+  padding: 20px;
+  background: $primary-color;
+}

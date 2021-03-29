@@ -1,0 +1,17 @@
+@import '../../vars';
+
+.sideBar {
+  width: 200px;
+  height: 100%;
+  background: black;
+  padding: 20px;
+  .image-logo{
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    img{
+      height: 100%;
+    }
+  }
+}
+
