@@ -4,14 +4,51 @@
   width: 200px;
   height: 100%;
   background: black;
-  padding: 20px;
-  .image-logo{
+  margin: 0;
+  padding: 0px;
+  padding-top: 10px;
+  .image-logo {
     display: flex;
     justify-content: center;
     height: 50px;
-    img{
+    margin: 15px 0px;
+    img {
       height: 100%;
+      margin-bottom: 20px;
+    }
+  }
+  li {
+    list-style: none;
+    padding-left: 20px;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .active {
+    border-left: 2px solid $font-color_primary;
+    padding-left: 18px;
+  }
+  .library {
+    text-transform: uppercase;
+    cursor: unset;
+    font-weight: 300;
+    color: $font-color_secundary;
+  }
+  .newPlaylist {
+    position: absolute;
+    bottom: 80px;
+    .addIcon {
+      margin-right: 10px;
+      transform: translateY(1px);
+      &:before {
+        font-size: 20px;
+      }
+    }
+    span {
+      color: $font-color_secundary;
+      font-weight: 300;
     }
   }
 }
-

@@ -10,7 +10,7 @@ const MusicPlayer = () => {
   return (
     <div className="musicPlayer">
       <TopBar />
-      <SideBar></SideBar>
+      <SideBar/>
       <Content></Content>
       <PlayBar></PlayBar>
     </div>
