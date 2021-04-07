@@ -2,8 +2,42 @@
 
 .content {
   width: calc(100% - 200px);
+  height: calc(100% - 75px);
   padding: 20px;
   background: $primary-color;
   padding-top: 80px;
-  font-size: 2rem;
+  overflow-y: scroll;
+  text-transform: capitalize;
+  &::-webkit-scrollbar{
+    width: 15px;
+  }
+  &::-webkit-scrollbar-thumb{
+    background: $secondary-color;
+    border-radius: 15px;
+
+  }
+  .playlist_title{
+    font-size: 24px
+  }
+  table{
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 15px;
+    font-size: initial;
+    & thead tr td {
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: $font-color_secundary;
+
+    }
+    & tr:not(:last-of-type){
+      border-bottom: 1px solid $secondary-color;
+    }
+    & td {
+      padding: 10px 0;
+    }
+  }
+  .icon{
+    cursor: pointer;
+  }
 }

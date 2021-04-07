@@ -3,6 +3,7 @@ import TopBar from './components/TopBar';
 import SideBar from './components/SideBar';
 import PlayBar from './components/PlayBar';
 import Content from './components/Content';
+import media from '../../media.json'
 
 import '../../styles/components/MusicPlayer/index.scss';
 
@@ -14,8 +15,9 @@ const DEFAULT_PLAYLIST = 'home';
 // initialState para el context
 const initialState = {
   currentPlaylist: DEFAULT_PLAYLIST,
+  media,
   playLists: {
-    home: new Set(),
+    home: new Set(media.ids), //el home dispone de todas las canciones
     favorites: new Set(),
   },
 };
@@ -33,6 +35,12 @@ const reducer = (state, action) => {
           ...state,
           currentPlaylist: action.playLists
         }
+    case 'ADD_FAVORITE':
+        state.playLists.favorites.add(action.songId)
+        return {...state}
+    case 'REMOVE_FAVORITE':
+        state.playLists.favorites.delete(action.songId);
+        return {...state}
     default:
       break;
   }
@@ -46,7 +54,7 @@ const MusicPlayer = () => {
       <div className="musicPlayer">
         <TopBar />
         <SideBar />
-        <Content></Content>
+        <Content />
         <PlayBar></PlayBar>
       </div>
     </StoreContext.Provider>
