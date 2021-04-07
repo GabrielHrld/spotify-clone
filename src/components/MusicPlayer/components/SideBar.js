@@ -1,5 +1,6 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useContext} from 'react';
 import '../../../styles/components/MusicPlayer/SideBar.scss';
+import { StoreContext } from '../index';
 import logo from '../../../assets/images/logo.png';
 import Modal from './Modal';
 import Toast from './Toast';
@@ -8,17 +9,15 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 const SideBar = ({ children }) => {
-  const [state, setState] = useState({
-    currentPlaylist: 'home',
+  //STATE
+  const [sidebarState, setState] = useState({
     modal: false,
-    playLists: {
-      home: new Set(),
-      favorites: new Set(),
-      
-    },
     toast: ''
   })
 
+  const { state, dispatch} = useContext(StoreContext);
+
+  //REFERENCIAS AL INPUT PARA AÑADIR PLAYLIST
   const playlistRef = useRef(null)
   const playLists = Object.keys(state.playLists);
 
@@ -26,13 +25,17 @@ const SideBar = ({ children }) => {
     e.preventDefault()
     const list = playlistRef.current.value
 
+    dispatch({type: 'ADD_PLAYLIST', playLists: list})
+
     setState({
       ...state,
       modal: false,
-      playLists: { ...state.playLists, [list]: new Set()},
       toast: 'Your playlist was created successfully'
     })
   }
+
+  //Toggle del modal
+  const handleModal = () => {setState({...sidebarState, modal: !sidebarState.modal})}
 
   return (
     <ul className="sideBar">
@@ -47,7 +50,7 @@ const SideBar = ({ children }) => {
             className={list === state.currentPlaylist ? 'active' : ''}
             onClick={
               () => {
-                setState({...state, currentPlaylist: list})
+                dispatch({type: 'SET_PLAYLIST', playLists: list })
               }
             }
           >
@@ -64,8 +67,8 @@ const SideBar = ({ children }) => {
       </li>
 
       <Modal 
-      show={state.modal}
-      close={() => {setState({...state, modal: false})}}
+      show={sidebarState.modal}
+      close={handleModal}
       >
         <form onSubmit={addPlaylist}>
           <div className="title">New Playlist</div>
@@ -83,10 +86,9 @@ const SideBar = ({ children }) => {
           </div>
         </form>
       </Modal>
-      <Toast toast={state.toast} close={() => {
-        setState({...state, toast: ''})
+      <Toast toast={sidebarState.toast} close={() => {
+        setState({...sidebarState, toast: ''})
       }}>
-
       </Toast>
     </ul>
   );
